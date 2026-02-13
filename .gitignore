@@ -1,0 +1,68 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+build/
+dist/
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- Data & Large Files ---
+# Ignore all data files by default
+data/**/*.csv
+data/**/*.tsv
+data/**/*.gz
+data/**/*.zip
+data/**/*.parquet
+data/**/*.h5
+data/**/*.pkl
+data/**/*.json
+# But keep the directory structure and READMEs
+!data/**/
+!data/**/*.md
+# Keep specific small example files if needed (uncomment and adjust)
+# !data/raw/sample.csv
+
+# --- LaTeX ---
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.pdf
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.run.xml
+*.bcf
+
+# --- Output ---
+output/**/*
+!output/**/
+!output/**/*.md
+
+# --- OS & IDE ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Secrets ---
+.env
+*.key
+secrets.json
+credentials*
