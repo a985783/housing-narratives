@@ -1,0 +1,35 @@
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:          volume_growth   R-squared:                        0.0125
+Estimator:                   PanelOLS   R-squared (Between):             -118.92
+No. Observations:                5466   R-squared (Within):               0.0083
+Date:                Mon, Feb 02 2026   R-squared (Overall):             -1.6941
+Time:                        17:50:58   Log-likelihood                    1745.5
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      13.397
+Entities:                         109   P-value                           0.0000
+Avg Obs:                       50.147   Distribution:                  F(5,5302)
+Min Obs:                       38.000                                           
+Max Obs:                       51.000   F-statistic (robust):             4.3497
+                                        P-value                           0.0006
+Time periods:                      51   Distribution:                  F(5,5302)
+Avg Obs:                       107.18                                           
+Min Obs:                       95.000                                           
+Max Obs:                       109.00                                           
+                                                                                
+                                Parameter Estimates                                
+===================================================================================
+                 Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------
+n_buy_lag          -0.0049     0.0065    -0.7629     0.4455     -0.0176      0.0077
+Inter_Structure     0.0033     0.0038     0.8813     0.3782     -0.0041      0.0107
+Inter_State_Bin     0.0193     0.0060     3.1880     0.0014      0.0074      0.0311
+Inter_Triple        0.0102     0.0065     1.5550     0.1200     -0.0027      0.0230
+ln_inv_lag         -0.0395     0.0129    -3.0567     0.0022     -0.0648     -0.0142
+===================================================================================
+
+F-test for Poolability: 40.170
+P-value: 0.0000
+Distribution: F(158,5302)
+
+Included effects: Entity, Time

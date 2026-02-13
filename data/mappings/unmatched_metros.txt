@@ -1,0 +1,207 @@
+Abilene, TX metro area
+Akron, OH metro area
+Amarillo, TX metro area
+Anchorage, AK metro area
+Appleton, WI metro area
+Asheville, NC metro area
+Atlantic City, NJ metro area
+Auburn, AL metro area
+Augusta, GA metro area
+Augusta, ME metro area
+Barnstable Town, MA metro area
+Baton Rouge, LA metro area
+Battle Creek, MI metro area
+Beaumont, TX metro area
+Bellingham, WA metro area
+Bend, OR metro area
+Billings, MT metro area
+Binghamton, NY metro area
+Bloomington, IN metro area
+Boulder, CO metro area
+Bowling Green, KY metro area
+Bozeman, MT metro area
+Brainerd, MN metro area
+Breckenridge, CO metro area
+Bremerton, WA metro area
+Brownsville, TX metro area
+Brunswick, GA metro area
+Burlington, NC metro area
+Burlington, VT metro area
+Canton, OH metro area
+Cape Coral, FL metro area
+Cedar Rapids, IA metro area
+Chambersburg, PA metro area
+Champaign, IL metro area
+Cheyenne, WY metro area
+Chico, CA metro area
+Clarksville, TN metro area
+Coeur d'Alene, ID metro area
+College Station, TX metro area
+Concord, NH metro area
+Crestview, FL metro area
+Daphne, AL metro area
+Davenport, IA metro area
+Dayton, OH metro area
+Deltona, FL metro area
+Dover, DE metro area
+East Stroudsburg, PA metro area
+Eau Claire, WI metro area
+Elizabethtown, KY metro area
+Elkhart, IN metro area
+Erie, PA metro area
+Eugene, OR metro area
+Evansville, IN metro area
+Fayetteville, AR metro area
+Fayetteville, NC metro area
+Flagstaff, AZ metro area
+Flint, MI metro area
+Florence, SC metro area
+Fort Collins, CO metro area
+Fort Smith, AR metro area
+Fort Wayne, IN metro area
+Frederick, MD metro area
+Gainesville, FL metro area
+Gainesville, GA metro area
+Gary, IN metro area
+Grand Junction, CO metro area
+Greeley, CO metro area
+Green Bay, WI metro area
+Gulfport, MS metro area
+Hagerstown, MD metro area
+Harrisburg, PA metro area
+Heber, UT metro area
+Hickory, NC metro area
+Hilo, HI metro area
+Hilton Head Island, SC metro area
+Homosassa Springs, FL metro area
+Hot Springs, AR metro area
+Huntington, WV metro area
+Huntsville, AL metro area
+Idaho Falls, ID metro area
+Iowa City, IA metro area
+Jackson, MI metro area
+Jackson, MS metro area
+Jackson, TN metro area
+Janesville, WI metro area
+Jefferson, GA metro area
+Johnson City, TN metro area
+Joplin, MO metro area
+Kahului, HI metro area
+Kalamazoo, MI metro area
+Kennewick, WA metro area
+Key West, FL metro area
+Killeen, TX metro area
+Kingsport, TN metro area
+Kingston, NY metro area
+Lafayette, IN metro area
+Lafayette, LA metro area
+Lake Charles, LA metro area
+Lake County, IL metro area
+Lake Havasu City, AZ metro area
+Lakeland, FL metro area
+Lancaster, PA metro area
+Lansing, MI metro area
+Las Cruces, NM metro area
+Lebanon, NH metro area
+Lebanon, PA metro area
+Lexington, KY metro area
+Lincoln, NE metro area
+Little Rock, AR metro area
+Longview, TX metro area
+Lubbock, TX metro area
+Lynchburg, VA metro area
+Macon, GA metro area
+Madison, WI metro area
+Manchester, NH metro area
+Medford, OR metro area
+Merced, CA metro area
+Mobile, AL metro area
+Modesto, CA metro area
+Monroe, MI metro area
+Montgomery County, PA metro area
+Montgomery, AL metro area
+Morehead City, NC metro area
+Mount Vernon, WA metro area
+Muskegon, MI metro area
+Myrtle Beach, SC metro area
+Naples, FL metro area
+New Bern, NC metro area
+New Brunswick, NJ metro area
+Niles, MI metro area
+North Port, FL metro area
+Norwich, CT metro area
+Ocala, FL metro area
+Ocean City, NJ metro area
+Ogden, UT metro area
+Olympia, WA metro area
+Oshkosh, WI metro area
+Oxnard, CA metro area
+Palm Bay, FL metro area
+Panama City, FL metro area
+Pensacola, FL metro area
+Peoria, IL metro area
+Pinehurst, NC metro area
+Port St. Lucie, FL metro area
+Poughkeepsie, NY metro area
+Prescott Valley, AZ metro area
+Provo, UT metro area
+Pueblo, CO metro area
+Punta Gorda, FL metro area
+Racine, WI metro area
+Rapid City, SD metro area
+Reading, PA metro area
+Redding, CA metro area
+Reno, NV metro area
+Roanoke, VA metro area
+Rockford, IL metro area
+Rockingham County, NH metro area
+Saginaw, MI metro area
+Salem, OR metro area
+Salinas, CA metro area
+San Luis Obispo, CA metro area
+San Rafael, CA metro area
+Santa Cruz, CA metro area
+Santa Fe, NM metro area
+Santa Maria, CA metro area
+Santa Rosa, CA metro area
+Savannah, GA metro area
+Scranton, PA metro area
+Sebastian, FL metro area
+Sebring, FL metro area
+Sevierville, TN metro area
+Sherman, TX metro area
+Sioux Falls, SD metro area
+South Bend, IN metro area
+Spartanburg, SC metro area
+Springfield, IL metro area
+Springfield, MA metro area
+Springfield, MO metro area
+Springfield, OH metro area
+St. Cloud, MN metro area
+Stockton, CA metro area
+Syracuse, NY metro area
+Tallahassee, FL metro area
+The Villages, FL metro area
+Toledo, OH metro area
+Topeka, KS metro area
+Torrington, CT metro area
+Traverse City, MI metro area
+Trenton, NJ metro area
+Truckee, CA metro area
+Tuscaloosa, AL metro area
+Tyler, TX metro area
+Utica, NY metro area
+Vallejo, CA metro area
+Visalia, CA metro area
+Warner Robins, GA metro area
+Waterloo, IA metro area
+Wausau, WI metro area
+Whitewater, WI metro area
+Wichita, KS metro area
+Winchester, VA metro area
+Winston-Salem, NC metro area
+Yakima, WA metro area
+York, PA metro area
+Youngstown, OH metro area
+Yuba City, CA metro area
+Yuma, AZ metro area
