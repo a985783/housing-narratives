@@ -1,0 +1,38 @@
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Conditional Effects: Friction Gates Narrative Transmission}
+\label{tab:interaction_results}
+\begin{tabular}{lcccc}
+\toprule
+& (1) & (2) & (3) & (4) \\
+& Baseline & Structure & State (Bin) & State (Cont) \\
+\midrule
+$N^{buy}_{t-1}$ & 0.002 & 0.004 & -0.005 & 0.002 \\
+& (0.006) & (0.006) & (0.006) & (0.006) \\
+\addlinespace
+$N^{buy}_{t-1} \times Inelastic$ &  & 0.007* &  &  \\
+&  & (0.004) &  &  \\
+\addlinespace
+$N^{buy}_{t-1} \times LowInv$ &  &  & 0.014** &  \\
+&  &  & (0.006) &  \\
+\addlinespace
+$N^{buy}_{t-1} \times \ln(Inventory)$ &  &  &  & -0.007 \\
+&  &  &  & (0.004) \\
+\addlinespace
+$\ln(Inventory)_{t-1}$ & -0.041*** & -0.038*** & -0.044*** & -0.047*** \\
+& (0.014) & (0.013) & (0.014) & (0.014) \\
+\addlinespace
+\midrule
+DMA FE & Yes & Yes & Yes & Yes \\
+Quarter FE & Yes & Yes & Yes & Yes \\
+Observations & 5466 & 5466 & 5466 & 5466 \\
+$R^2$ (Within) & 0.006 & 0.007 & 0.006 & 0.006 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes}: Standard errors clustered by DMA. $LowInv$ is a binary indicator for inventory below the median. $Inelastic = -SaizElasticity$. 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

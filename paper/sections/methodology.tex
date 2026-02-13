@@ -1,0 +1,93 @@
+% ============================================
+% EMPIRICAL STRATEGY
+% ============================================
+
+This section presents our empirical strategy for testing the predictions derived from the ECR-CAS framework. We estimate a baseline predictive regression, a supply-constraint interaction model, and a standardized-outcome mechanism test, and we compare volume versus price responses.
+
+\subsection{Baseline Specification: Narrative Prediction and Controls}
+
+Our main regression equation is:
+\begin{equation}
+\label{eq:main_reg}
+\begin{aligned}
+\Delta \ln \text{Volume}_{m,t} = & \ \alpha_m + \delta_t + \beta_1 \Nbuy_{m,t-1} + \beta_2 \Nrisk_{m,t-1} \\
+& + X'_{m,t} \gamma + \varepsilon_{m,t}
+\end{aligned}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\Delta \ln \text{Volume}_{m,t}$: Log change in transaction volume for DMA $m$ in quarter $t$
+    \item $\alpha_m$: DMA fixed effects (absorb time-invariant DMA characteristics)
+    \item $\delta_t$: Quarter fixed effects (absorb aggregate shocks: interest rates, national sentiment)
+    \item $\Nbuy_{m,t-1}$, $\Nrisk_{m,t-1}$: Lagged narrative indices
+    \item $X_{m,t}$: Control variables (lagged volume growth, inventory, and macro controls where available)
+    \item $\varepsilon_{m,t}$: Error term
+\end{itemize}
+
+\paragraph{Expected Signs.} The sign of $\beta_1$ is ambiguous ex ante. In the post-2012 period with tight inventory, we expect a ``frustrated demand'' pattern in which higher buy-side attention predicts \textit{lower} subsequent volume. We expect $\beta_2 < 0$ for risk narratives.
+
+\paragraph{Identification.} With DMA and time fixed effects, identification comes from \textit{within-DMA, within-quarter} variation in narrative attention relative to other DMAs. The lagged structure ($t-1$ narratives predicting $t$ outcomes) addresses reverse causality concerns, though we cannot rule out omitted third factors. We interpret results as predictive relationships with mechanistic interpretation, not causal claims.
+
+\subsection{Supply Elasticity Heterogeneity}
+
+To test Prediction \ref{pred:supply_constraint}, we estimate:
+\begin{equation}
+\label{eq:saiz_interaction}
+\Delta \ln \text{Volume}_{m,t} = \alpha_m + \delta_t + \beta_1 \Nbuy_{m,t-1} + \phi \left(\Nbuy_{m,t-1} \times \text{Inelastic}_m \right) + X'_{m,t}\gamma + \varepsilon_{m,t}
+\end{equation}
+where $\text{Inelastic}_m$ is the (negative) Saiz elasticity measure (higher values imply tighter supply constraints).
+
+\subsection{Mechanism Validation: Standardized Outcomes}
+
+To distinguish behavioral heterogeneity from mechanical variance compression, we re-estimate Eq. \ref{eq:saiz_interaction} using DMA-standardized volume growth $z(\Delta \ln V)$ as the dependent variable. Persistence of $\phi$ under standardization indicates a behavioral mechanism.
+
+\subsubsection{Reverse Causality}
+
+A concern for the baseline specification is reverse causality: high volume $\to$ media coverage $\to$ search activity. We address this through:
+\begin{enumerate}
+    \item \textbf{Lagged narratives}: Using $t-1$ narratives to predict $t$ outcomes
+    \item \textbf{Controlling for momentum}: Including lagged volume growth
+    \item \textbf{Time fixed effects}: Absorbing national-level sentiment cycles
+\end{enumerate}
+
+\subsection{Standard Errors}
+
+We cluster standard errors at the \textbf{DMA level} to account for spatial correlation among metros that share a media market and narrative signal. All reported baseline results use DMA clustering.
+
+\subsection{Secondary Specifications}
+
+\subsubsection{Volume vs. Price}
+
+To test Prediction \ref{pred:volume_leads} (volume leads price), we estimate:
+\begin{equation}
+\label{eq:price_comparison}
+\Delta \ln P_{m,t} = \alpha_m + \delta_t + \beta_1^P \Nbuy_{m,t-1} + \beta_2^P \Nrisk_{m,t-1} + X'_{m,t} \gamma + \varepsilon_{m,t}
+\end{equation}
+
+and compare standardized effect sizes $|\hat{\beta}_1| / \text{SD}(\Delta \ln \text{Volume})$ vs. $|\hat{\beta}_1^P| / \text{SD}(\Delta \ln P)$.
+
+\subsection{Summary of Empirical Design}
+
+Table \ref{tab:empirical_summary} summarizes our empirical specifications and their corresponding theoretical predictions.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of Empirical Specifications}
+\label{tab:empirical_summary}
+\footnotesize
+\begin{tabular}{llll}
+\toprule
+\textbf{Specification} & \textbf{Key Parameter} & \textbf{Prediction} & \textbf{Interpretation} \\
+\midrule
+Baseline (Eq. \ref{eq:main_reg}) & $\beta_1$ & $\lessgtr 0$ & Buy narratives predict volume (frustrated demand if $<0$) \\
+& $\beta_2$ & $< 0$ & Risk narratives predict volume decline \\
+\addlinespace
+Supply Interaction (Eq. \ref{eq:saiz_interaction}) & $\phi$ & $> 0$ & Constraints attenuate narrative effects \\
+\addlinespace
+Standardized DV & $\phi$ & $> 0$ & Heterogeneity is behavioral, not mechanical \\
+\addlinespace
+Volume vs. Price & $|\hat{\beta}^V| > |\hat{\beta}^P|$ & Yes & Volume leads price \\
+\bottomrule
+\end{tabular}
+\end{table}

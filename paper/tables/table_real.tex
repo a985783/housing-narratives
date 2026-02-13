@@ -1,0 +1,29 @@
+
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Results with Deterministic Crosswalk (Phase 1.8B)}
+\label{tab:real_results}
+\begin{tabular}{lccc}
+\toprule
+& (1) & (2) & (3) \\
+\midrule
+$N^{buy}_{t-1}$ & 0.003 & 0.003 & 0.002 \\
+& (0.006) & (0.006) & (0.005) \\
+\addlinespace
+$N^{risk}_{t-1}$ & & -0.001 & -0.001 \\
+& & (0.001) & (0.001) \\
+\midrule
+Inventory & No & No & Yes \\
+DMA FE & Yes & Yes & Yes \\
+Quarter FE & Yes & Yes & Yes \\
+Observations & 6267 & 6267 & 6140 \\
+R-squared & 0.003 & 0.003 & -0.006 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes}: DMA-level analysis (127 DMAs). Dependent variable is volume growth aggregated to DMA level. Standard errors clustered by DMA.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

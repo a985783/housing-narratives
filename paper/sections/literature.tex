@@ -1,0 +1,75 @@
+% ============================================
+% LITERATURE REVIEW
+% ============================================
+
+This paper connects to four strands of literature: (1) narrative economics and behavioral finance; (2) credit constraints and housing cycles; (3) macroprudential policy and regulatory effects; and (4) complexity economics and agent-based approaches. We review each in turn, highlighting how our ECR-CAS framework synthesizes these perspectives.
+
+\subsection{Narrative Economics and Behavioral Finance}
+
+The role of narratives in driving economic fluctuations has received increasing attention following \cite{shiller2017narrative, shiller2019narrative}, who argues that economic narratives spread like epidemics and shape macroeconomic outcomes by influencing expectations and behavior. This perspective extends earlier behavioral finance insights on investor sentiment \citep{barberis2018psychology, de1990noise} by emphasizing the \textit{content} of beliefs rather than just their deviation from rationality.
+
+In housing markets specifically, \cite{case2012makes} document that homebuyer expectations exhibit boom-time optimism and post-crisis pessimism inconsistent with fundamental models. \cite{bailey2018economic} show that individuals' housing expectations are shaped by the experiences of their social networks, providing evidence for narrative contagion at the micro level. \cite{armona2019home} demonstrate that house price expectations respond asymmetrically to local price signals, consistent with narrative-driven belief updating. \cite{glaeser2014real} analyze how housing narratives and speculative behavior drove real estate booms in China, highlighting the role of belief formation in asset price dynamics.
+
+A key empirical challenge in this literature is \textit{measuring} narratives. Prior approaches include survey-based expectation measures \citep{piazzesi2009housing}, media content analysis \citep{soo2018quantifying}, and internet search data \citep{wu2015google, beracha2017forecasting}. Our contribution is to construct a \textit{dual} narrative index distinguishing buy-side from risk narratives at the DMA level, using DMA-level Google Trends and within-sample standardization for comparability.
+
+\subsection{Credit Constraints and Housing Cycles}
+
+The interaction between credit conditions and housing markets is central to macroprudential theory. \cite{mian2009consequences} provide foundational evidence that ZIP codes with faster mortgage credit expansion in 2002--2005 experienced larger subsequent house price increases and more severe defaults. \cite{mian2011house} further document that home equity-based borrowing amplified consumption during the boom and bust.
+
+The theoretical mechanism linking credit to housing cycles typically operates through collateral constraints. In models with limited enforcement \citep{kiyotaki1997credit}, rising asset prices relax borrowing constraints, enabling further asset purchases that push prices higher---a classic ``financial accelerator'' \citep{bernanke1989agency}. \cite{geanakoplos2010leverage} extends this logic by emphasizing how leverage itself is endogenous: during optimistic phases, creditors accept lower margins, amplifying both the boom and the eventual bust. \cite{jorda2015leveraged} provide historical evidence that leveraged asset price bubbles, particularly in housing, pose significant systemic risks and often end in severe financial crises. \cite{kaplan2020housing} develop a quantitative model of the U.S. housing boom and bust, showing how collateral constraints and expectations interact to generate realistic boom-bust dynamics.
+
+The key insight from this literature, which we formalize in the ECR-CAS framework, is that credit constraints operate as a ``hard wall'' (using the language of complexity theory) that determines \textit{which} expectations can be \textit{acted upon}. Bullish narratives, no matter how prevalent, cannot drive transactions if households cannot obtain credit. Conversely, loose credit conditions enable narrative-driven demand to manifest in actual purchases.
+
+We contribute to this literature by outlining how the \textit{interaction} between narratives (a soft constraint) and credit conditions (a hard constraint) can be estimated in a unified framework. Prior work has studied these channels separately; we treat their joint determination as a priority for future work.
+
+\subsection{Macroprudential Policy and Regulatory Effects}
+
+The post-2008 regulatory response included a suite of macroprudential measures aimed at limiting housing and credit excesses. In the U.S., the Dodd-Frank Act's Ability-to-Repay (ATR) and Qualified Mortgage (QM) rules, implemented in January 2014, represent a major tightening of underwriting standards. QM loans must meet specific criteria including a debt-to-income (DTI) ratio generally not exceeding 43\%, documentary verification of income, and restrictions on toxic loan features.
+
+Existing evidence on ATR/QM effects is mixed. \cite{defusco2020regulating} find that the policy reduced access to high-DTI loans but had limited effects on overall origination volumes. \cite{bhutta2021impact} document shifts toward FHA and VA loans (which are QM-exempt) following the regulation. \cite{looney2018safe} suggests that QM's safe harbor provisions primarily affected lender behavior at the margin.
+
+Our contribution differs from this literature in focus. Rather than estimating ATR/QM's average effect on credit volume, we motivate a future test of whether the regulation altered the \textit{transmission mechanism} from expectations/narratives to market activity. In ECR-CAS terms, we treat ATR/QM as a \textit{leverage point intervention} that modifies the constraint set $C$, potentially dampening the reflexive amplification of narratives.
+
+\subsection{Complexity Economics and Agent-Based Approaches}
+
+Complexity economics provides the meta-framework that motivates our ECR-CAS model. \cite{arthur2021foundations} characterizes economic systems as ``not in equilibrium but in constant evolution,'' exhibiting emergent phenomena, tipping points, and path dependence. In financial markets, this perspective has generated agent-based models that can replicate stylized facts like fat tails and volatility clustering \citep{hommes2021behavioral, lux1999scaling}.
+
+The specific architectural choices in ECR-CAS draw on several traditions:
+
+\begin{itemize}
+    \item \textbf{Reflexivity:} \cite{soros2008new} introduced the concept of reflexive feedback between expectations and fundamentals. We formalize this as the $N \to E \to A \to R \to N$ loop.
+    
+    \item \textbf{Heterogeneous expectations:} \cite{brock1998heterogeneous} model markets with interacting fundamentalist and chartist traders. We adapt this to housing with narrative-driven, fundamentals-driven, and trend-following agents.
+    
+    \item \textbf{Network contagion:} \cite{cont2016fire} analyze fire-sale cascades in interbank networks. While our current implementation does not explicitly model the network topology, the framework accommodates such extensions.
+    
+    \item \textbf{Regime detection:} The literature on Markov-switching and threshold models \citep{hamilton1989new} informs our treatment of policy-induced structural breaks.
+\end{itemize}
+
+Our contribution to complexity economics is methodological: we develop ECR-CAS as a \textit{bridge} between theoretical agent-based models and empirical reduced-form analysis. The framework generates testable predictions that can be evaluated with observational data, addressing the common criticism that ABMs are ``just-so stories'' that cannot be falsified.
+
+\subsection{Positioning This Paper}
+
+Table \ref{tab:literature_position} summarizes how this paper relates to the existing literature.
+
+\begin{table}[htbp]
+\centering
+\caption{Positioning This Paper in the Literature}
+\label{tab:literature_position}
+\small
+\begin{tabular}{p{3.5cm}p{4.5cm}p{5cm}}
+\toprule
+\textbf{Literature Strand} & \textbf{Key Prior Work} & \textbf{Our Contribution} \\
+\midrule
+Narrative Economics & Shiller (2019); Case \& Shiller (2012) & DMA-level dual narrative index with DMA standardization \\
+\addlinespace
+Credit \& Housing Cycles & Mian \& Sufi (2009, 2011); Geanakoplos (2010) & Direct estimation of narrative $\times$ credit interaction \\
+\addlinespace
+Macroprudential Policy & DeFusco et al. (2020); Bhutta \& Ringo (2021) & Motivates a future test of narrative transmission under ATR/QM \\
+\addlinespace
+Complexity Economics & Arthur (2021); Hommes (2021) & ECR-CAS framework bridging ABM theory and empirical testability \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The closest antecedent to our work is the emerging literature using internet search data to forecast housing markets \citep{wu2015google, beracha2017forecasting}. We extend this approach by (1) constructing directionally distinct narrative indices (buy vs. risk), (2) examining interactions with credit conditions, and (3) identifying policy-induced changes in the predictive relationship. The theoretical grounding in ECR-CAS further distinguishes our analysis from atheoretical forecasting exercises.

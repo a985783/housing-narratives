@@ -1,0 +1,21 @@
+% ============================================
+% ROBUSTNESS CHECKS
+% ============================================
+
+This section validates the main results through three complementary robustness analyses.
+
+\subsection{Saiz Match Diagnostics}
+
+Because the supply-elasticity analysis requires matching DMAs to Saiz (2010) geographic constraints, we conduct match-bias diagnostics. Table \ref{tab:match_bias} compares markets that successfully match to the Saiz data against those that do not, assessing whether selection into the mechanism subsample introduces systematic bias. Table \ref{tab:saiz_funnel} documents the sample construction process, showing how the initial 300 metros are progressively filtered to the final 127 DMAs with complete data. These diagnostics confirm that the mechanism subsample remains representative of major U.S. housing markets, with observable characteristics balanced across matched and unmatched markets.
+
+\subsection{Standardized Outcome Test}
+
+A concern with the baseline specification is that the interaction effect might reflect variance compression in standardized indices rather than genuine behavioral heterogeneity. To address this, we repeat the interaction test using DMA-standardized volume growth (demeaned and divided by DMA-specific standard deviations). The Buy narrative $\times$ Low Inventory interaction remains positive and statistically significant ($p < 0.05$), as reported in Table \ref{tab:mechanism_std_dv}. This confirms that the Friction Gate mechanism operates through behavioral amplification rather than mechanical index properties.
+
+\subsection{Threshold Sensitivity}
+
+To assess whether the ``Low Inventory'' definition drives the results, we conduct a threshold sensitivity analysis. Figure \ref{fig:threshold_sweep} plots the interaction coefficient across inventory thresholds ranging from the 10th to 60th percentile. The positive gating effect remains stable across the 20--40\% range, peaking near the median (30th percentile), indicating that the mechanism is robust to alternative definitions of market tightness.
+
+\subsection{Summary}
+
+These robustness checks support the main claims about friction-gated narrative transmission. The Saiz match diagnostics confirm sample representativeness; the standardized outcome test rules out variance-compression artifacts; and the threshold analysis demonstrates stability across alternative tightness definitions.

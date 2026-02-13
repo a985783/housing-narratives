@@ -1,0 +1,147 @@
+% ============================================
+% DATA DICTIONARY AND VARIABLE DEFINITIONS
+% ============================================
+
+This appendix provides detailed definitions for all variables used in the analysis. HMDA-based credit variables are planned for a future extension and are not used in the current empirical results.
+
+\section*{A.1 Sample Construction}
+
+\subsection*{DMA Selection}
+
+\begin{enumerate}
+    \item Download Redfin Data Center metro-level files for \texttt{homes\_sold} indicator.
+    
+    \item Filter Redfin data to All Residential, 2012Q1--2024Q4.
+    \item Map metros to Designated Market Areas (DMAs) using a deterministic crosswalk.
+    \item Aggregate all housing market indicators (volume, price, inventory) to the DMA level.
+    \item Restrict the sample to 127 DMAs with non-missing Saiz (2010) housing supply elasticity data.
+\end{enumerate}
+
+\subsection*{CBSA to DMA Crosswalk}
+
+We use a deterministic crosswalk to map Redfin metropolitan areas to Nielsen DMAs. For DMAs containing multiple metros, we sum transaction volumes and inventory, and take volume-weighted averages for price growth.
+
+\section*{A.2 Variable Definitions}
+
+\subsection*{Dependent Variables}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3cm}p{4cm}p{6cm}}
+\toprule
+\textbf{Variable} & \textbf{Source} & \textbf{Definition} \\
+\midrule
+Volume$_{m,t}$ & Redfin Data Center & Sum of monthly \texttt{homes\_sold} within quarter $t$ for DMA $m$ \\
+\addlinespace
+$\Delta\ln$ Volume$_{m,t}$ & Computed & $\ln(\text{Volume}_{m,t}) - \ln(\text{Volume}_{m,t-1})$ \\
+\addlinespace
+Price Growth$_{m,t}$ & Redfin & Quarterly log change in median sale price (DMA-aggregated) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Narrative Indices}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3cm}p{4cm}p{6cm}}
+\toprule
+\textbf{Variable} & \textbf{Source} & \textbf{Definition} \\
+\midrule
+Raw GT$_{m,t}(q)$ & Google Trends API & Monthly search index (0--100) for keyword $q$ in DMA $m$ \\
+\addlinespace
+$\tilde{N}_{m,t}(q)$ & Computed & $\frac{\text{GT}_{m,t}(q) - \mu_q}{\sigma_q}$, standardized within keyword $q$ across the pooled sample \\
+\addlinespace
+$\Nbuy_{m,t}$ & Computed & Mean of $\tilde{N}_{m,t}(q)$ for $q \in Q^{\text{buy}}$, then standardized to z-score \\
+\addlinespace
+$\Nrisk_{m,t}$ & Computed & Mean of $\tilde{N}_{m,t}(q)$ for $q \in Q^{\text{risk}}$, then standardized \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Keyword Baskets:}
+\begin{itemize}
+    \item $Q^{\text{buy}}$: \{``buy a house'', ``homes for sale'', ``mortgage preapproval'', ``first time home buyer'', ``down payment''\}
+    \item $Q^{\text{risk}}$: \{``housing crash'', ``foreclosure'', ``mortgage rate'', ``house price bubble'', ``recession''\}
+\end{itemize}
+
+\textbf{Temporal Aggregation:} Monthly Google Trends values are averaged to quarterly.
+
+\subsection*{Credit Condition Variables (Planned Extension)}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{3.5cm}p{6cm}}
+\toprule
+\textbf{Variable} & \textbf{Source} & \textbf{Definition} \\
+\midrule
+Applications$_{m,y}$ & HMDA & Count of loan applications (action\_taken $\in$ \{1,2,3,4,5,6,7,8\}) \\
+\addlinespace
+Originated$_{m,y}$ & HMDA & Count with action\_taken = 1 (loan originated) \\
+\addlinespace
+Denied$_{m,y}$ & HMDA & Count with action\_taken = 3 (application denied) \\
+\addlinespace
+DenialRate$^{\text{dec}}_{m,y}$ & Computed & $\frac{\text{Denied}_{m,y}}{\text{Denied}_{m,y} + \text{Originated}_{m,y}}$ \\
+\addlinespace
+OriginationRate$_{m,y}$ & Computed & $\frac{\text{Originated}_{m,y}}{\text{Applications}_{m,y}}$ \\
+\addlinespace
+HighLTI$_{m,y}$ & Computed & Share of originated loans with $\frac{\text{loan\_amount}}{\text{income}} > 4$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{HMDA Filters Applied:}
+\begin{itemize}
+    \item loan\_purpose = 1 (home purchase)
+    \item lien\_status = 1 (first lien)
+    \item property\_type = 1 (one-to-four family)
+    \item occupancy = 1 (owner-occupied)
+\end{itemize}
+
+\subsection*{Policy Exposure Variable (Planned Extension)}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{3.5cm}p{6cm}}
+\toprule
+\textbf{Variable} & \textbf{Source} & \textbf{Definition} \\
+\midrule
+CLL$_{c,y}$ & FHFA & Conforming loan limit for county $c$, year $y$ \\
+\addlinespace
+Jumbo$_i$ & Computed & $\mathbf{1}[\text{loan\_amount}_i > \text{CLL}_{c(i),y}]$ \\
+\addlinespace
+JumboShare$_{c,y}$ & Computed & $\frac{\#\text{Jumbo loans}_{c,y}}{\#\text{All loans}_{c,y}}$ \\
+\addlinespace
+JumboShare$_{m,y}$ & Computed & $\sum_{c \in m} w_{c,m,y} \cdot \text{JumboShare}_{c,y}$ \\
+& & where $w_{c,m,y} = \frac{\#\text{Loans}_{c,y}}{\sum_{c' \in m}\#\text{Loans}_{c',y}}$ \\
+\addlinespace
+Exposure$_m$ & Computed & $\frac{1}{4}\sum_{y=2010}^{2013} \text{JumboShare}_{m,y}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Control Variables}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{3.5cm}p{6cm}}
+\toprule
+\textbf{Variable} & \textbf{Source} & \textbf{Definition} \\
+\midrule
+Unemployment$_{m,t}$ & BLS LAUS & Average of monthly unemployment rates within quarter \\
+\addlinespace
+Population$_{m,y}$ & Census / ACS & Annual population estimate for metro \\
+\addlinespace
+Income$_{m,y}$ & ACS & Median household income, annual \\
+\addlinespace
+MortgageRate$_t$ & FRED & Average of weekly 30-year fixed mortgage rate within quarter \\
+\addlinespace
+Inventory$_{m,t}$ & Redfin & Average of monthly inventory (active listings) within quarter \\
+\bottomrule
+\end{tabular}
+\end{table}

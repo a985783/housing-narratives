@@ -1,0 +1,29 @@
+\begin{table}[htbp]
+\centering
+\caption{Descriptive Statistics (Real Data)}
+\label{tab:desc_stats}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Variable} & \textbf{N} & \textbf{Mean} & \textbf{SD} & \textbf{P25} & \textbf{Median} & \textbf{P75} \\
+\midrule
+\multicolumn{7}{l}{\textit{Outcome Variables}} \\
+Volume (homes sold) & 6,394 & 5,606 & 8,627 & 974 & 1,838 & 4,586 \\
+$\Delta$ln(Volume) & 6,394 & 0.012 & 0.292 & -0.162 & -0.047 & 0.164 \\
+$\Delta$ln(Price) & 6,394 & 0.016 & 0.100 & -0.019 & 0.010 & 0.049 \\
+\addlinespace
+\multicolumn{7}{l}{\textit{Narrative Indices}} \\
+$\Nbuy$ (standardized) & 6,394 & 0.075 & 0.850 & -0.485 & 0.069 & 0.646 \\
+$\Nrisk$ (standardized) & 6,394 & -0.026 & 0.588 & -0.437 & -0.140 & 0.253 \\
+\addlinespace
+\multicolumn{7}{l}{\textit{Controls \& Exposures}} \\
+Inventory (log) & 6,394 & 7.656 & 1.073 & 6.880 & 7.643 & 8.417 \\
+Unemployment Rate (\%) & 6,394 & 4.915 & 0.821 & 4.248 & 4.839 & 5.524 \\
+30Y Mortgage Rate (\%) & 6,394 & 4.040 & 0.565 & 3.622 & 4.004 & 4.555 \\
+Jumbo Exposure (Proxy Rank) & 6,394 & 0.434 & 0.285 & 0.183 & 0.417 & 0.710 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Note}: Real data from Redfin, Google Trends, and FRED. N=6,394 reflects the canonical sample of 127 DMAs over 2012--2024.
+\end{tablenotes}
+\end{table}

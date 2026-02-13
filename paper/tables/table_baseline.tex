@@ -1,0 +1,34 @@
+\begin{table}[htbp]
+\centering
+\caption{Baseline Results: Narrative Indices and Housing Volume}
+\label{tab:baseline}
+\begin{tabular}{lccccc}
+\toprule
+& (1) & (2) & (3) & (4) & (5) \\
+\midrule
+$N^{buy}_{t-1}$ & 0.033*** & 0.033*** & 0.030*** & 0.033*** & 0.033*** \\
+& (0.004) & (0.004) & (0.004) & (0.004) & (0.004) \\
+\addlinespace
+$N^{risk}_{t-1}$ & & -0.011** & -0.011*** & -0.011** & -0.011** \\
+& & (0.005) & (0.004) & (0.005) & (0.005) \\
+\addlinespace
+$N^{buy} \times Credit$ & & & & 0.000 & \\
+& & & & (0.002) & \\
+\addlinespace
+$N^{buy} \times Exp \times Post$ & & & & & -0.001 \\
+& & & & & (0.002) \\
+
+\midrule
+Metro FE & Yes & Yes & Yes & Yes & Yes \\
+Quarter FE & Yes & Yes & Yes & Yes & Yes \\
+Controls & No & No & Yes & Yes & Yes \\
+Observations & 15000 & 15000 & 15000 & 15000 & 15000 \\
+R$^2$ (within) & -0.027 & -0.020 & 0.225 & -0.019 & -0.020 \\
+
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes}: Clustered standard errors (DMA) in parentheses. *** p$<$0.01, ** p$<$0.05, * p$<$0.1.
+\end{tablenotes}
+\end{table}

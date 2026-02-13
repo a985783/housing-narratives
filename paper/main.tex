@@ -1,0 +1,147 @@
+\documentclass[12pt,a4paper]{article}
+
+% ============================================
+% PACKAGES
+% ============================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{appendix}
+\usepackage{enumitem}
+\usepackage{threeparttable}
+
+% ============================================
+% THEOREM ENVIRONMENTS
+% ============================================
+\newtheorem{proposition}{Proposition}
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{prediction}{Testable Prediction}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+% ============================================
+% CUSTOM COMMANDS
+% ============================================
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\Nbuy}{N^{\text{buy}}}
+\newcommand{\Nrisk}{N^{\text{risk}}}
+\newcommand{\dopr}{\text{do}}
+
+% ============================================
+% DOCUMENT INFO
+% ============================================
+\title{\textbf{Housing Narratives, Mortgage Constraints, and Housing Cycles:} \\ 
+\large Evidence from Search Data and Housing Transactions with a Heterogeneous-Expectations Collateral Model}
+
+\author{Qingsong Cui\thanks{Email: \href{mailto:qingsongcui9857@gmail.com}{qingsongcui9857@gmail.com}}}
+
+\date{\today}
+
+% ============================================
+% BEGIN DOCUMENT
+% ============================================
+\begin{document}
+
+\maketitle
+
+\input{sections/abstract}
+
+\textbf{Keywords:} Housing cycles; Narrative economics; Mortgage constraints; Macroprudential policy; Heterogeneous expectations; Complexity economics; ATR/QM regulation
+
+\textbf{JEL Classification:} E32, G21, G28, R31, D84
+
+\newpage
+\tableofcontents
+\newpage
+
+\doublespacing
+
+% ============================================
+% MAIN SECTIONS
+% ============================================
+
+\section{Introduction}
+\label{sec:intro}
+\input{sections/introduction}
+
+\section{Literature Review}
+\label{sec:literature}
+\input{sections/literature}
+
+\section{Theoretical Framework: The ECR-CAS Model}
+\label{sec:theory}
+\input{sections/theory}
+
+\section{Data and Variables}
+\label{sec:data}
+\input{sections/data}
+
+\section{Empirical Strategy}
+\label{sec:methodology}
+\input{sections/methodology}
+
+\section{Results}
+\label{sec:results}
+\input{sections/results}
+
+\section{Robustness Checks}
+\label{sec:robustness}
+\input{sections/robustness}
+
+\section{Discussion}
+\label{sec:discussion}
+\input{sections/discussion}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{sections/conclusion}
+
+% ============================================
+% REFERENCES
+% ============================================
+\newpage
+\singlespacing
+\bibliographystyle{aer}
+\bibliography{references}
+
+% ============================================
+% APPENDIX
+% ============================================
+\newpage
+\begin{appendices}
+\section{Data Dictionary and Variable Definitions}
+\label{app:data}
+\input{appendix/data_dictionary}
+
+\section{Technical Appendix: Model Derivations}
+\label{app:technical}
+\input{appendix/technical_appendix}
+
+\section{Additional Tables and Figures}
+\label{app:tables}
+\input{appendix/additional_tables}
+\end{appendices}
+
+\end{document}

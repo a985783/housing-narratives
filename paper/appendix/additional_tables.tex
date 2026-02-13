@@ -1,0 +1,106 @@
+% ============================================
+% ADDITIONAL TABLES AND FIGURES
+% ============================================
+
+This appendix contains supplementary tables and figures referenced in the main text.
+
+\section*{C.1 Summary Statistics by Period}
+
+\begin{table}[H]
+\centering
+\caption{Summary Statistics: Pre-ATR/QM vs. Post-ATR/QM}
+\label{tab:summary_by_period}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{3}{c}{Pre-2014 (2012Q1--2013Q4)} & \multicolumn{3}{c}{Post-2014 (2014Q1--2024Q4)} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+\textbf{Variable} & Mean & SD & N & Mean & SD & N \\
+\midrule
+$\Delta\ln$ Volume & 0.040 & 0.428 & 984 & 0.008 & 0.271 & 5,410 \\
+$\Nbuy$ & -1.181 & 0.457 & 984 & 0.227 & 0.755 & 5,410 \\
+$\Nrisk$ & 0.367 & 0.584 & 984 & -0.074 & 0.571 & 5,410 \\
+Inventory (log) & 7.807 & 1.353 & 984 & 7.638 & 1.032 & 5,410 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes}: Pre-period = 8 quarters (2012Q1--2013Q4). Post-period = 44 quarters (2014Q1--2024Q4). Values based on the canonical sample (N=6,394).
+\end{tablenotes}
+\end{table}
+
+\section*{C.2 Correlation Matrix}
+
+\begin{table}[H]
+\centering
+\caption{Correlation Matrix of Key Variables}
+\label{tab:correlation}
+\small
+\begin{tabular}{lccccc}
+\toprule
+& (1) & (2) & (3) & (4) & (5) \\
+\midrule
+(1) $\Delta\ln$ Volume & 1.00 & & & & \\
+(2) $\Delta\ln$ Price & 0.32 & 1.00 & & & \\
+(3) $\Nbuy$ & 0.11 & 0.13 & 1.00 & & \\
+(4) $\Nrisk$ & 0.05 & 0.03 & $-$0.03 & 1.00 & \\
+(5) Inventory (log) & 0.02 & 0.02 & $-$0.08 & 0.08 & 1.00 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes}: Correlations computed from the canonical sample (N=6,394).
+\end{tablenotes}
+\end{table}
+
+% NOTE: Tables C.3-C.5 (Alternative Specifications, Heterogeneity, Lag Structure)
+% have been removed pending re-estimation with DMA-level narrative data.
+% These tables previously contained results from simulated data that conflicted
+% with the main real-data findings.
+
+\section*{C.3 Panel Balance Summary}
+
+\begin{table}[H]
+\centering
+\caption{Panel Balance and Data Coverage}
+\label{tab:panel_balance}
+\begin{tabular}{lc}
+\toprule
+\textbf{Dimension} & \textbf{Value} \\
+\midrule
+Number of metros (Redfin Top 300) & 300 \\
+Time period & 2012Q1--2024Q4 \\
+Number of quarters & 52 \\
+Theoretical max observations & 15,600 \\
+\addlinespace
+\textit{After deterministic crosswalk:} & \\
+Metros matched to DMA & 202 \\
+Observations after crosswalk & 10,263 \\
+\addlinespace
+Observations with non-missing $\Nbuy$ & 7,270 \\
+Final regression sample (Canonical) & 6,394 (127 DMAs) \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes}: We strictly use complete-case analysis for the main specifications. The canonical sample covers 127 DMAs with non-missing Saiz elasticity data.
+\end{tablenotes}
+\end{table}
+
+\section*{C.4 Subsample Diagnostics: Saiz Match Bias}
+
+To investigate the representativeness of our mechanism subsample, we compare metros matched to the \cite{saiz2010geographic} elasticity data against those not matched.
+
+\input{../output/tables/table_match_bias.tex}
+
+\section*{C.5 Saiz Mechanism Subsample Construction}
+
+\input{../output/tables/table_saiz_funnel.tex}
+
+\section*{C.6 Mechanism Validation: Standardized Dependent Variable Test}
+
+\input{../output/tables/table_mechanism_std_dv.tex}
+
+\section*{C.7 Robust Inference: Wild Cluster Bootstrap}
+
+We will add a Wild Cluster Bootstrap robustness check for the heterogeneity interaction in a subsequent revision.

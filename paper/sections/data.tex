@@ -1,0 +1,139 @@
+% ============================================
+% DATA AND VARIABLES
+% ============================================
+
+This section describes our data sources, sample construction, and variable definitions. All data are publicly available and our analysis is fully replicable.
+
+\subsection{Sample Definition}
+
+\paragraph{Data Summary.} Our primary analysis relies on a panel of 127 Designated Market Areas (DMAs) from 2012Q1 to 2024Q4, yielding a canonical sample of 6,394 quarterly observations. We use the DMA as our primary unit of analysis because Google Trends data are natively aggregated at this level, ensuring the highest possible signal-to-noise ratio for narrative attention. 
+
+The sample is constructed by mapping top-tier U.S. metropolitan areas to their corresponding DMAs. We further restrict the sample to DMAs with non-missing housing supply elasticity data from \citet{saiz2010geographic},\footnote{We exclude DMAs for which Saiz elasticity measures are unavailable, as these are essential for testing our structural friction hypotheses.} which is required for our main interaction specifications. The resulting panel provides broad geographic coverage of the U.S. housing market while maintaining rigorous data quality standards.
+
+This sample construction has three advantages:
+\begin{itemize}
+    \item \textbf{Data quality}: Large DMAs have more reliable Google Trends data (less zero censoring) and more stable Redfin coverage.
+    \item \textbf{Representativeness}: The sample focuses on large markets that account for a substantial share of U.S. housing activity.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Sample Selection Funnel}
+\label{tab:sample_funnel}
+\begin{tabular}{lr}
+\toprule
+\textbf{Selection Step} & \textbf{Count} \\
+\midrule
+Redfin top metros (raw universe) & 300 \\
+Mapped to DMA (deterministic crosswalk) & 202 \\
+Google Trends data available & 143 \\
+\midrule
+\textbf{Final Analysis Sample (Unique DMAs)} & \textbf{127} \\
+Quarterly observations (N) & 6,394 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Dependent Variable: Transaction Volume}
+
+Our primary dependent variable is \textbf{housing transaction volume}, which we argue is more responsive to narratives than prices (see Prediction \ref{pred:volume_leads}).
+
+\begin{table}[htbp]
+\centering
+\caption{Dependent Variable Definition}
+\label{tab:dep_var}
+\begin{tabular}{ll}
+\toprule
+\textbf{Variable} & \textbf{Definition} \\
+\midrule
+\texttt{Volume}$_{m,t}$ & Number of homes sold in DMA $m$, quarter $t$ \\
+\texttt{$\Delta$lnVolume}$_{m,t}$ & $\ln(\text{Volume}_{m,t}) - \ln(\text{Volume}_{m,t-1})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Data Source.} Redfin Data Center provides housing market statistics including \texttt{homes\_sold}, \texttt{pending\_sales}, \texttt{median\_sale\_price}, and \texttt{inventory}. While raw data are provided at the metro level, we aggregate all indicators to the DMA level to match the granularity of our narrative indices. Data are available at monthly frequency; we aggregate to quarterly by summing monthly values.
+
+\paragraph{Secondary Outcome.} We analyze house prices using the Redfin median sale price (quarterly log change) to test the ``volume leads price'' prediction. FHFA HPI is a planned robustness check.
+
+\subsection{Narrative Indices: Google Trends with DMA Standardization}
+
+We construct two narrative attention indices from Google Trends data: $\Nbuy$ (buy-side narratives) and $\Nrisk$ (risk narratives).
+
+\subsubsection{Keyword Baskets}
+
+Table \ref{tab:keywords} presents the fixed keyword baskets used to construct each index.
+
+\begin{table}[htbp]
+\centering
+\caption{Narrative Index Keyword Baskets}
+\label{tab:keywords}
+\begin{tabular}{ll}
+\toprule
+\textbf{Index} & \textbf{Keywords} \\
+\midrule
+$\Nbuy$ (Buy Narrative) & \texttt{buy a house}, \texttt{homes for sale}, \texttt{mortgage preapproval} \\
+& \texttt{first time home buyer}, \texttt{down payment} \\
+\addlinespace
+$\Nrisk$ (Risk Narrative) & \texttt{housing crash}, \texttt{foreclosure}, \texttt{mortgage rate} \\
+& \texttt{house price bubble}, \texttt{recession} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Pooled Within-Keyword Z-Standardization}
+
+Google Trends returns a 0--100 relative index that is not directly comparable across geographies. We construct comparable indices using DMA-level data and pooled within-keyword z-standardization:
+
+\begin{enumerate}
+    \item For each DMA $m$ and keyword $q$, we fetch monthly Google Trends data over 2012--2024.
+    \item We standardize each keyword series within the pooled sample:
+    \begin{equation}
+    \tilde{N}_{m,t}(q) = \frac{GT_{m,t}(q) - \mu_q}{\sigma_q}
+    \end{equation}
+    where $\mu_q$ and $\sigma_q$ are the mean and standard deviation of keyword $q$ over the sample.
+    \item We average across keywords in each basket:
+    \begin{equation}
+    \Nbuy_{m,t} = \frac{1}{|Q^{\text{buy}}|} \sum_{q \in Q^{\text{buy}}} \tilde{N}_{m,t}(q)
+    \end{equation}
+    and similarly for $\Nrisk_{m,t}$.
+    \item We standardize the resulting indices to z-scores for interpretability.
+\end{enumerate}
+
+\paragraph{Temporal Aggregation.} Google Trends data are collected at monthly frequency and averaged to quarterly.
+
+\subsection{Control Variables}
+
+We include the following DMA-level controls:
+
+\begin{table}[htbp]
+\centering
+\caption{Control Variables}
+\label{tab:controls}
+\begin{tabular}{lll}
+\toprule
+\textbf{Variable} & \textbf{Source} & \textbf{Frequency} \\
+\midrule
+Unemployment rate & BLS LAUS & Monthly $\to$ Quarterly \\
+Population growth & Census / ACS & Annual \\
+Median household income & ACS & Annual \\
+30-year mortgage rate & FRED & Weekly $\to$ Quarterly \\
+Housing inventory (active listings) & Redfin & Monthly $\to$ Quarterly \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Descriptive Statistics}
+
+Table \ref{tab:desc_stats} presents summary statistics for our main variables in the final analysis sample with Saiz elasticity data ($N=6,394$).
+
+\input{sections/data_table_filled.tex}
+
+\subsection{Data Quality Checks}
+
+We perform several data quality assessments:
+
+\begin{enumerate}
+    \item \textbf{Trends coverage}: We drop DMA-quarters with missing narrative indices and report the resulting sample size and DMA coverage.
+    \item \textbf{Boundary stability}: We use a fixed metro naming scheme and a deterministic Metro-to-DMA crosswalk to avoid spurious variation from boundary changes.
+\end{enumerate}

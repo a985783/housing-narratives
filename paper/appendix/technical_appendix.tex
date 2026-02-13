@@ -1,0 +1,265 @@
+% ============================================
+% TECHNICAL APPENDIX: MODEL DERIVATIONS
+% ============================================
+
+\section{Technical Appendix}
+
+\subsection{Google Trends Measurement Model}
+
+A critical challenge in using Google Trends for cross-sectional analysis is that the search index ($GT_{m,t}(q)$) for keyword $q$ in DMA $m$ at time $t$ is normalized to $[0, 100]$ relative to the region's own history. To enable valid cross-DMA comparison, we employ a \textbf{pooled within-keyword z-standardization} procedure.
+
+Let $GT_{m,t}(q)$ be the raw relative search index. We standardize each keyword series within the pooled sample (across all DMAs and time periods):
+\begin{equation}
+\tilde{N}_{m,t}(q) = \frac{GT_{m,t}(q) - \mu_q}{\sigma_q}
+\end{equation}
+where $\mu_q$ and $\sigma_q$ are the mean and standard deviation of keyword $q$ calculated over the entire panel. This transformation ensures that search intensity is measured in units of standard deviations from the global keyword mean, making the indices comparable across geographies.
+
+The aggregate narrative indices are then constructed as the simple average of standardized keyword signals within each basket $Q$:
+\begin{equation}
+N_{m,t} = \frac{1}{|Q|} \sum_{q \in Q} \tilde{N}_{m,t}(q)
+\end{equation}
+Finally, we standardize the resulting indices $N_{m,t}$ to z-scores for ease of interpretation in the regression analysis.
+This appendix provides detailed derivations for the theoretical results presented in Section \ref{sec:theory}.
+
+\section*{B.1 ECR-CAS Model: Full Specification}
+
+\subsection*{B.1.1 Complete System of Equations}
+
+The ECR-CAS model is defined by the following system:
+
+\textbf{1. State Dynamics with Clearing}
+\begin{align}
+S_{t+1} &= F(S_t, A_t, M_t, X_t; C, \theta) \\
+\tilde{S}_t &= \mathcal{Q}(S_t, A_t; P) \quad \text{(clearing operator)}
+\end{align}
+
+where the clearing operator $\mathcal{Q}$ enforces:
+\begin{itemize}
+    \item Budget constraints: $\forall i: A_t^i \leq W_t^i + B_t^i$ where $B_t^i$ is borrowing capacity
+    \item Non-negativity: $S_t^{\text{inventory}} \geq 0$
+    \item Margin/LTV constraints: $\text{Debt}_t^i / \text{Asset}_t^i \leq \overline{\text{LTV}}$
+\end{itemize}
+
+\textbf{2. Narrative Dynamics}
+\begin{equation}
+N_{t+1} = \rho_N N_t + \beta_N h(R_t) + \gamma_N \mathcal{I}_t + \Gamma \mathcal{G} N_t + \epsilon_t^N
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\rho_N \in (0,1)$: Persistence (decay without reinforcement)
+    \item $h(R_t)$: Outcome feedback function (increasing in positive returns)
+    \item $\mathcal{I}_t$: Exogenous information flow
+    \item $\Gamma \mathcal{G} N_t$: Network contagion term ($\mathcal{G}$ is adjacency matrix)
+\end{itemize}
+
+\textbf{3. Heterogeneous Expectations}
+\begin{align}
+E_t^f &= \bar{P} + \lambda_f (P_t - \bar{P}) \quad \text{(fundamentalists)} \\
+E_t^\tau &= P_t + \lambda_\tau \Delta P_t \quad \text{(trend-followers)} \\
+E_t^n &= P_t + \lambda_n^+ N_t^{\text{buy}} - \lambda_n^- N_t^{\text{risk}} \quad \text{(narrative-driven)}
+\end{align}
+
+\textbf{4. Type Switching (Discrete Choice)}
+\begin{equation}
+\omega_{t+1}^j = \frac{\omega_t^j \cdot \exp(\eta U_t^j)}{\sum_{k} \omega_t^k \cdot \exp(\eta U_t^k)}
+\end{equation}
+
+where $U_t^j = -(E_{t-1}^j - P_t)^2$ (negative squared forecast error).
+
+\textbf{5. Aggregate Expectation}
+\begin{equation}
+\bar{E}_t = \sum_{j \in \{f, \tau, n\}} \omega_t^j E_t^j
+\end{equation}
+
+\textbf{6. Aggregate Demand (Housing Units)}
+\begin{equation}
+D_t = D_0 + \alpha_E (\bar{E}_t - P_t) - \alpha_r r_t + \alpha_Y Y_t + u_t^D
+\end{equation}
+
+subject to credit constraint:
+\begin{equation}
+D_t^{\text{constrained}} = \min\left(D_t, \frac{\bar{B}_t}{\text{LTV} \cdot P_t}\right)
+\end{equation}
+
+where $\bar{B}_t$ is aggregate borrowing capacity.
+
+\textbf{7. Price Adjustment (Sticky)}
+\begin{equation}
+\Delta P_t = \kappa (D_t^{\text{constrained}} - S_t^{\text{inventory}}) + u_t^P
+\end{equation}
+
+where $\kappa > 0$ is small (price stickiness).
+
+\textbf{8. Volume}
+\begin{equation}
+V_t = \min(D_t^{\text{constrained}}, S_t^{\text{inventory}} + \text{NewListings}_t)
+\end{equation}
+
+\subsection*{B.1.2 Steady State}
+
+At steady state ($N_t = N^*, P_t = P^*, V_t = V^*$):
+\begin{align}
+N^* &= \frac{\gamma_N \mathcal{I}^*}{1 - \rho_N - \Gamma \mathbf{1}} \\
+E^* &= P^* \quad \text{(all types forecast correctly in SS)} \\
+\omega^* &= (1/3, 1/3, 1/3) \quad \text{(if all types equally accurate)} \\
+P^* &= \bar{P} \quad \text{(if fundamentalists dominate long-run)}
+\end{align}
+
+\section*{B.2 Derivation of Testable Predictions}
+
+\subsection*{B.2.1 Prediction 1: Volume Leads Price}
+
+\textbf{Claim:} $\partial V_t / \partial N_{t-1}^{\text{buy}} > \partial P_t / \partial N_{t-1}^{\text{buy}}$ in standardized units.
+
+\textbf{Proof Sketch:}
+
+From the demand equation:
+\begin{equation}
+\frac{\partial D_t}{\partial N_{t-1}^{\text{buy}}} = \alpha_E \cdot \omega_t^n \cdot \lambda_n^+
+\end{equation}
+
+Volume responds as:
+\begin{equation}
+\frac{\partial V_t}{\partial N_{t-1}^{\text{buy}}} = \frac{\partial D_t^{\text{constrained}}}{\partial N_{t-1}^{\text{buy}}} \approx \alpha_E \omega_t^n \lambda_n^+ \cdot \mathbf{1}[\text{unconstrained}]
+\end{equation}
+
+Price adjustment is:
+\begin{equation}
+\frac{\partial P_t}{\partial N_{t-1}^{\text{buy}}} = \kappa \cdot \frac{\partial D_t^{\text{constrained}}}{\partial N_{t-1}^{\text{buy}}}
+\end{equation}
+
+Since $\kappa$ is small (housing prices are sticky), volume adjusts more than prices for a given demand shock. $\square$
+
+\subsection*{B.2.2 Prediction 2: Reflexivity Amplification}
+
+\textbf{Claim:} $\frac{\partial^2 V_t}{\partial N_t^{\text{buy}} \partial \text{Credit}_t} > 0$
+
+\textbf{Proof Sketch:}
+
+Define credit looseness as inverse denial rate: $\text{Credit}_t = 1 - \text{DenialRate}_t$.
+
+Borrowing capacity is:
+\begin{equation}
+\bar{B}_t = \bar{B}_0 \cdot g(\text{Credit}_t)
+\end{equation}
+
+where $g'(\cdot) > 0$ (looser credit $\to$ more borrowing).
+
+The constrained demand is:
+\begin{equation}
+D_t^{\text{constrained}} = \min\left(D_t, \frac{\bar{B}_0 \cdot g(\text{Credit}_t)}{\text{LTV} \cdot P_t}\right)
+\end{equation}
+
+When credit is loose, the constraint binds less often, so:
+\begin{equation}
+\frac{\partial D_t^{\text{constrained}}}{\partial N_t^{\text{buy}}} \bigg|_{\text{loose credit}} > \frac{\partial D_t^{\text{constrained}}}{\partial N_t^{\text{buy}}} \bigg|_{\text{tight credit}}
+\end{equation}
+
+Therefore the cross-partial is positive. $\square$
+
+\subsection*{B.2.3 Prediction 3: Policy Regime Shift}
+
+\textbf{Claim:} ATR/QM tightens the constraint set, reducing $\frac{\partial V_t}{\partial N_t^{\text{buy}}}$ in high-exposure areas.
+
+\textbf{Proof Sketch:}
+
+ATR/QM adds a DTI constraint:
+\begin{equation}
+\text{DTI}^i = \frac{\text{MonthlyPayment}^i}{\text{Income}^i} \leq 0.43
+\end{equation}
+
+This is equivalent to reducing effective borrowing capacity:
+\begin{equation}
+\bar{B}_t^{\text{post}} = \bar{B}_t^{\text{pre}} \cdot \mathbf{1}[\text{DTI} \leq 0.43]
+\end{equation}
+
+For DMAs with high jumbo share (Exposure$_m$ high), more borrowers are at the margin of this constraint, so:
+\begin{equation}
+\Delta \bar{B}_m^{\text{post-pre}} = -f(\text{Exposure}_m)
+\end{equation}
+
+where $f'(\cdot) > 0$. This tightens $D^{\text{constrained}}$ more in high-exposure DMAs, reducing the narrative-to-volume transmission. $\square$
+
+\section*{B.3 Observation Layer: Measurement Equations}
+
+\subsection*{B.3.1 Narrative Observation}
+
+The latent narrative state $N_t$ is proxied by search intensity:
+\begin{equation}
+\text{GT}_{m,t}(q) = \mathcal{O}_N(N_{m,t}^{(q)}) + \epsilon_{m,t}^{GT}
+\end{equation}
+
+where $\mathcal{O}_N(\cdot)$ is a monotonic transformation (higher narrative intensity $\to$ higher search).
+
+Within-sample standardization provides a consistent scale:
+\begin{equation}
+\tilde{N}_{m,t}(q) = \frac{\text{GT}_{m,t}(q) - \mu_q}{\sigma_q}
+\end{equation}
+where $\mu_q$ and $\sigma_q$ are the mean and standard deviation of keyword $q$ over the sample.
+
+\subsection*{B.3.2 Credit Observation}
+
+Denial rate proxies for the tightness of credit supply (planned extension):
+\begin{equation}
+\text{DenialRate}_{m,y} = \mathcal{O}_C(C^{\text{tight}}_{m,y}) + \epsilon_{m,y}^{HMDA}
+\end{equation}
+
+where $\mathcal{O}_C(\cdot)$ is increasing (tighter credit $\to$ more denials).
+
+\section*{B.4 Leverage Point Ranking Algorithm}
+
+Given a set of candidate interventions $\{L_1, \ldots, L_K\}$, we propose the following ranking procedure:
+
+\begin{algorithm}[H]
+\caption{Leverage Point Evaluation}
+\begin{algorithmic}[1]
+\For{each candidate $L_k$}
+    \State Estimate effect: $\hat{\Delta}_k = \mathbb{E}[R \mid \text{do}(L_k)] - \mathbb{E}[R \mid \text{do}(\varnothing)]$
+    \State Estimate feasibility cost: $\hat{\kappa}_k$
+    \State Estimate reversibility: $\hat{\rho}_k = \Pr(\text{recovery} \mid \text{rollback})$
+    \State Estimate tail risk: $\hat{\tau}_k = \Delta \Pr(\text{crash})$
+\EndFor
+\State Solve: $L^* = \arg\max_L \left[\hat{\Delta}(L) - \lambda \hat{\kappa}(L)\right]$ s.t. $\hat{\tau}(L) \leq \bar{\tau}$, $\hat{\rho}(L) \geq \bar{\rho}$
+\State \Return Ranked list of interventions
+\end{algorithmic}
+\end{algorithm}
+
+In practice, estimation of these quantities requires either:
+\begin{itemize}
+    \item Quasi-experimental variation (for $\hat{\Delta}$)
+    \item Expert elicitation (for $\hat{\kappa}$, $\hat{\rho}$)
+    \item Simulation counterfactuals (for $\hat{\tau}$)
+\end{itemize}
+
+\section*{B.5 Connection to Agent-Based Implementation}
+
+The ECR-CAS framework can be implemented as an agent-based model with the following components:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{ECR Component} & \textbf{ABM Implementation} \\
+\midrule
+State $S_t$ & Global variables: price index, inventory count, aggregate leverage \\
+Agents $i$ & Household objects with: wealth, leverage, type $\in \{f, \tau, n\}$ \\
+Narratives $N_t$ & Agent-level belief intensity, updated via network diffusion \\
+Expectations $E_t^i$ & Agent method: \texttt{form\_expectation(type, N)} \\
+Actions $A_t^i$ & Agent decision: \texttt{decide\_purchase(E, constraints)} \\
+Market $M_t$ & Matching algorithm: double auction or posted price \\
+Clearing $\mathcal{Q}$ & Forced sale module if constraints violated \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Calibration targets for MSM estimation:
+\begin{enumerate}
+    \item Price growth distribution moments (mean, variance, skewness, kurtosis)
+    \item Volume autocorrelation structure
+    \item Narrative-volume cross-correlation at various lags
+    \item Policy response coefficients (if available)
+\end{enumerate}
+
+We leave full ABM implementation and calibration to future work.

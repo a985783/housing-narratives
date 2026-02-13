@@ -1,0 +1,332 @@
+% ============================================
+% THEORETICAL FRAMEWORK: THE ECR-CAS MODEL
+% ============================================
+
+This section presents our theoretical framework: the \textbf{Expectation-Constraint-Reflexivity Complex Adaptive System (ECR-CAS)} model. We first provide an overview of the framework's architecture, then present the formal equations governing each component, and finally derive testable predictions that connect the model to our empirical analysis.
+
+\subsection{Framework Overview}
+
+The ECR-CAS model conceptualizes housing market dynamics as emerging from the interaction of multiple components across distinct layers. Figure \ref{fig:ecr_diagram} illustrates the overall architecture.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    box/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=1cm, align=center, fill=blue!10},
+    constraint/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=1cm, align=center, fill=red!10},
+    arrow/.style={-{Stealth[length=3mm]}, thick},
+    feedback/.style={-{Stealth[length=3mm]}, thick, dashed, color=gray}
+]
+
+% Main nodes
+\node[box] (N) {Narrative Field\\$N_t$};
+\node[box, right=of N] (E) {Expectations\\$E_t^i$};
+\node[box, right=of E] (A) {Actions\\$A_t^i$};
+\node[box, right=of A] (R) {Outcomes\\$R_t$};
+
+% Constraint nodes
+\node[constraint, below=1cm of A] (C) {Constraints\\$C = \{C_h, C_s\}$};
+\node[constraint, below=1cm of E] (I) {Information\\$\mathcal{I}_t$};
+
+% Arrows
+\draw[arrow] (N) -- (E) node[midway, above] {\small belief};
+\draw[arrow] (E) -- (A) node[midway, above] {\small decision};
+\draw[arrow] (A) -- (R) node[midway, above] {\small market};
+
+% Constraint arrows
+\draw[arrow] (C) -- (A) node[midway, right] {\small hard wall};
+\draw[arrow] (I) -- (E) node[midway, right] {\small signal};
+
+% Feedback loop
+\draw[feedback] (R.south) -- ++(0,-1) -| (N.south) node[pos=0.25, below] {\small reflexive feedback};
+
+% Policy intervention
+\node[above=0.5cm of C, color=red!70!black] (L) {\footnotesize \textbf{Leverage Point} $L$};
+\draw[-{Stealth}, color=red!70!black, thick] (L) -- (C);
+
+\end{tikzpicture}
+\caption{ECR-CAS Model Architecture. Narratives ($N$) influence expectation formation ($E$), which guides actions ($A$) subject to constraints ($C$). Market clearing produces outcomes ($R$), which feed back to reshape narratives. Policy interventions ($L$) operate by modifying constraints.}
+\label{fig:ecr_diagram}
+\end{figure}
+
+The key elements of the framework are:
+
+\begin{definition}[ECR-CAS Components]
+\label{def:components}
+The ECR-CAS model comprises the following components:
+\begin{itemize}
+    \item $S_t$: \textbf{State vector} capturing aggregate market conditions (price indices, inventory, aggregate leverage)
+    \item $N_t$: \textbf{Narrative field} representing the distribution of housing market stories/beliefs in the population
+    \item $E_t^i$: \textbf{Expectations} of agent $i$ about future states, conditional on information and narratives
+    \item $I_t$: \textbf{Incentives} including interest rates, tax treatment, and direct subsidies
+    \item $C = \{C_h, C_s\}$: \textbf{Constraints}, decomposed into hard constraints $C_h$ (accounting identities, physical limits) and soft constraints $C_s$ (regulatory rules, norms)
+    \item $A_t^i$: \textbf{Actions} including purchase/sale decisions, mortgage applications, and leverage choices
+    \item $R_t$: \textbf{Outcomes} including prices, transaction volumes, default rates
+    \item $L$: \textbf{Leverage points} for policy intervention
+\end{itemize}
+\end{definition}
+
+The ECR-CAS framework is distinguished from standard macroeconomic models by three features:
+
+\begin{enumerate}
+    \item \textbf{Reflexivity:} Outcomes feed back to narratives, creating potential for self-fulfilling dynamics and multiple equilibria.
+    
+    \item \textbf{Constraint Hierarchy:} Hard constraints ($C_h$) are inviolable (budget constraints, liquidity), while soft constraints ($C_s$) are enforceable but modifiable by policy.
+    
+    \item \textbf{Heterogeneous Expectations:} Agents may hold different beliefs based on their information sets and susceptibility to narratives.
+\end{enumerate}
+
+\subsection{Structural Layer: The Generative Process}
+
+We now formalize each component of the ECR-CAS model in discrete time.
+
+\subsubsection{State Dynamics}
+
+Let $S_t \in \mathbb{R}^n$ denote the state vector at time $t$, including aggregate variables such as:
+\begin{itemize}
+    \item $P_t$: House price index (DMA level)
+    \item $V_t$: Transaction volume (homes sold)
+    \item $L_t$: Aggregate household leverage (mortgage debt / income)
+    \item $K_t$: Housing inventory (months of supply)
+\end{itemize}
+
+The state evolves according to:
+\begin{equation}
+\label{eq:state_dynamics}
+S_{t+1} = F(S_t, A_t, M_t, X_t; C, \theta) \quad \text{subject to } P
+\end{equation}
+where:
+\begin{itemize}
+    \item $A_t = \sum_i A_t^i$ aggregates individual actions
+    \item $M_t$ represents market clearing mechanisms (matching, auction, negotiation)
+    \item $X_t$ denotes exogenous shocks (interest rate changes, income shocks)
+    \item $C$ is the constraint set
+    \item $\theta$ are structural parameters
+    \item $P$ denotes the set of ``physical laws'' (accounting identities, conservation laws)
+\end{itemize}
+
+\begin{assumption}[Hard Constraint Enforcement]
+\label{ass:hard_constraint}
+The constraints $P$ are inviolable. Any action $A_t^i$ that would violate budget constraints, generate negative equity below a threshold, or exceed physical capacity is immediately corrected by the \textbf{clearing operator} $\mathcal{Q}$:
+\begin{equation}
+\label{eq:clearing}
+(S_t, A_t) \xrightarrow{\ \mathcal{Q}(P)\ } \tilde{S}_t
+\end{equation}
+Examples include margin calls, foreclosure, and forced liquidation.
+\end{assumption}
+
+\subsubsection{Narrative Dynamics}
+
+The narrative field $N_t$ captures the aggregate intensity and direction of housing market beliefs. We model $N_t$ as a vector with components:
+\begin{itemize}
+    \item $N_t^{\text{buy}}$: Buy-side narrative intensity (``good time to buy,'' ``prices will rise'')
+    \item $N_t^{\text{risk}}$: Risk narrative intensity (``bubble,'' ``crash coming,'' ``foreclosure'')
+\end{itemize}
+
+Narratives evolve according to a contagion-decay process:
+\begin{equation}
+\label{eq:narrative_dynamics}
+N_{t+1} = G(N_t, R_t, \mathcal{I}_t, \mathcal{G}; C_s, \phi)
+\end{equation}
+where:
+\begin{itemize}
+    \item $R_t$ are outcomes from the previous period (reflexive feedback)
+    \item $\mathcal{I}_t$ is the information environment (media coverage, social media, policy announcements)
+    \item $\mathcal{G}$ is the social network topology governing narrative spread
+    \item $\phi$ are narrative contagion parameters
+\end{itemize}
+
+A simple implementation is a modified SIR (susceptible-infected-recovered) or DeGroot learning model:
+\begin{equation}
+\label{eq:narrative_sir}
+N_{t+1}^{\text{buy}} = \rho N_t^{\text{buy}} + \beta \cdot h(R_t) + \gamma \cdot \text{media}_t + \epsilon_t^N
+\end{equation}
+where $\rho < 1$ is persistence (decay without reinforcement), $h(R_t)$ captures how positive outcomes fuel optimism, and $\gamma$ weights exogenous information.
+
+\subsubsection{Expectation Formation}
+
+Agent $i$'s expectation about future states is:
+\begin{equation}
+\label{eq:expectations}
+E_t^i = \mathbb{E}[S_{t+1} \mid \Omega_t^i, N_t]
+\end{equation}
+where $\Omega_t^i \subseteq \mathcal{I}_t$ is agent $i$'s information set.
+
+We adopt a heterogeneous expectations specification with three agent types:
+
+\begin{enumerate}
+    \item \textbf{Fundamentalists ($f$):} Form expectations based on fundamentals (income, rent-to-price ratios)
+    \begin{equation}
+    E_t^f = \bar{P} + \lambda_f (P_t - \bar{P})
+    \end{equation}
+    where $\bar{P}$ is the long-run fundamental price and $\lambda_f < 1$ implies mean reversion.
+    
+    \item \textbf{Trend-followers ($\tau$):} Extrapolate recent price changes
+    \begin{equation}
+    E_t^\tau = P_t + \lambda_\tau (P_t - P_{t-1})
+    \end{equation}
+    where $\lambda_\tau > 0$ implies momentum.
+    
+    \item \textbf{Narrative-driven ($n$):} Respond to prevailing narratives
+    \begin{equation}
+    E_t^n = P_t + \lambda_n^+ N_t^{\text{buy}} - \lambda_n^- N_t^{\text{risk}}
+    \end{equation}
+\end{enumerate}
+
+The population shares of each type, $(\omega_t^f, \omega_t^\tau, \omega_t^n)$, evolve endogenously based on past forecast accuracy (reinforcement learning):
+\begin{equation}
+\label{eq:type_switching}
+\omega_{t+1}^j = \frac{\omega_t^j \cdot \exp(\eta U_t^j)}{\sum_k \omega_t^k \cdot \exp(\eta U_t^k)}
+\end{equation}
+where $U_t^j$ is the forecast accuracy of type $j$ and $\eta$ is the intensity of choice.
+
+\subsubsection{Action Rules}
+
+Agent $i$'s purchase/mortgage decision is:
+\begin{equation}
+\label{eq:action_rule}
+A_t^i = \pi^i(E_t^i, I_t, S_t; C) \quad \text{subject to } P
+\end{equation}
+
+For housing purchase, a simplified specification is:
+\begin{equation}
+\label{eq:housing_demand}
+A_t^i = 
+\begin{cases}
+1 & \text{if } E_t^i[P_{t+1}] - P_t > r + c \text{ and } \text{DownPayment}_i \geq \text{LTV}^{\max} \cdot P_t \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+where $r$ is the interest rate, $c$ is transaction cost, and $\text{LTV}^{\max}$ is the maximum loan-to-value ratio.
+
+The critical feature is that \textit{even highly optimistic expectations cannot generate a purchase if the credit constraint binds}. This formalizes the interaction between narratives (affecting $E_t^i$) and constraints (affecting feasibility).
+
+\subsubsection{Outcome Generation and Feedback}
+
+Market-clearing produces aggregate outcomes:
+\begin{equation}
+\label{eq:outcomes}
+R_t = H(\tilde{S}_t, A_t; C)
+\end{equation}
+
+The reflexive feedback loop closes with outcomes influencing future narratives:
+\begin{equation}
+\label{eq:feedback}
+N_{t+1} = G(N_t, R_t, \ldots)
+\end{equation}
+
+This creates the potential for \textit{self-reinforcing dynamics}: optimistic narratives → purchases → price increases → validation of optimism → more optimistic narratives. The loop is bounded by hard constraints: at some point, credit limits, income constraints, or inventory shortages prevent further expansion.
+
+\subsection{Observation Layer: Connecting Model to Data}
+
+A critical element of the ECR-CAS framework---often missing in complexity economics models---is an explicit \textbf{observation layer} that connects latent model variables to observable data:
+\begin{equation}
+\label{eq:observation}
+Y_t = \mathcal{O}(S_t, N_t, E_t; \eta) + \varepsilon_t
+\end{equation}
+where:
+\begin{itemize}
+    \item $Y_t$ is the vector of observables (prices, volumes, search data, survey expectations)
+    \item $\mathcal{O}$ is the observation mapping
+    \item $\eta$ are measurement parameters
+    \item $\varepsilon_t$ is measurement error
+\end{itemize}
+
+For our empirical implementation:
+
+\begin{table}[htbp]
+\centering
+\caption{Observation Layer: Mapping Latent Variables to Data}
+\label{tab:observation_layer}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Latent Variable} & \textbf{Observable Proxy} & \textbf{Data Source} \\
+\midrule
+$N_t^{\text{buy}}$ & Search intensity for buy keywords & Google Trends \\
+$N_t^{\text{risk}}$ & Search intensity for risk keywords & Google Trends \\
+$E_t$ (aggregate) & House price expectations & NY Fed SCE (robustness) \\
+$C$ (credit tightness) & Denial rate, LTI distribution (planned) & HMDA (future work) \\
+$A_t$ (actions) & Transaction volume & Redfin \\
+$R_t$ (prices) & House price index & FHFA HPI \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Leverage Points and Policy Intervention}
+
+A key innovation of the ECR-CAS framework is the formal treatment of \textbf{leverage points}---nodes in the system where intervention can alter dynamics:
+
+\begin{definition}[Leverage Point]
+\label{def:leverage_point}
+A leverage point $L$ is an intervention that modifies parameters, rules, or network structure:
+\begin{equation}
+\dopr(L): (\theta, C_s, \mathcal{I}, \mathcal{G}) \mapsto (\theta', C_s', \mathcal{I}', \mathcal{G}')
+\end{equation}
+\end{definition}
+
+Leverage points are evaluated along four dimensions:
+\begin{enumerate}
+    \item \textbf{Effect}: $\Delta(L) = \mathbb{E}[R \mid \dopr(L)] - \mathbb{E}[R \mid \dopr(\varnothing)]$
+    \item \textbf{Feasibility}: $\kappa(L)$ = implementation cost, political constraints
+    \item \textbf{Reversibility}: $\rho(L) = \Pr(\text{recovery to baseline} \mid \text{rollback})$
+    \item \textbf{Tail Risk}: $\tau(L) = \Delta \Pr(\text{crash})$ or $\Delta \mathbb{E}[\text{cascade size}]$
+\end{enumerate}
+
+In our empirical context, the ATR/QM regulation represents a leverage point that modifies the soft constraint set $C_s$ by tightening underwriting standards. We propose that this intervention may attenuate the reflexive transmission from narratives to market activity, a hypothesis left for future empirical work.
+
+\subsection{Testable Predictions}
+
+The ECR-CAS framework generates the following testable predictions, which we evaluate in Sections \ref{sec:results} and \ref{sec:robustness}.
+
+\begin{prediction}[Volume Leads Price]
+\label{pred:volume_leads}
+In housing markets with price stickiness, narratives first affect transaction volume (actions $A$), and prices adjust with a lag. Therefore:
+\begin{equation}
+\frac{\partial V_{t+1}}{\partial N_t^{\text{buy}}} > \frac{\partial P_{t+1}}{\partial N_t^{\text{buy}}}
+\end{equation}
+in normalized units (effect size relative to standard deviation).
+\end{prediction}
+
+\begin{prediction}[Reflexivity Amplification]
+\label{pred:reflexivity}
+The effect of narratives on transactions is amplified when credit constraints are looser. If $\text{Credit}_t$ measures credit availability (inverse of denial rate):
+\begin{equation}
+\frac{\partial^2 V_{t+1}}{\partial N_t^{\text{buy}} \partial \text{Credit}_t} > 0
+\end{equation}
+\end{prediction}
+
+\begin{prediction}[Asymmetric Risk Narrative Effect]
+\label{pred:asymmetry}
+Risk narratives ($N^{\text{risk}}$) have larger effects on volume during periods of credit tightening (constraint binding):
+\begin{equation}
+\left| \frac{\partial V_{t+1}}{\partial N_t^{\text{risk}}} \right|_{\text{tight credit}} > \left| \frac{\partial V_{t+1}}{\partial N_t^{\text{risk}}} \right|_{\text{loose credit}}
+\end{equation}
+\end{prediction}
+
+\begin{prediction}[Supply Constraint Heterogeneity]
+\label{pred:supply_constraint}
+The marginal effect of buy-side attention on transaction volume depends on housing supply elasticity. In markets with elastic supply, elevated search intensity may predict \textit{lower} volume growth due to choice overload or speculative crowding. In inelastic markets, the effect is attenuated due to capacity constraints that compress volume variance:
+\begin{equation}
+\left| \frac{\partial V_{t+1}}{\partial N_t^{\text{buy}}} \right|_{\text{elastic supply}} > \left| \frac{\partial V_{t+1}}{\partial N_t^{\text{buy}}} \right|_{\text{inelastic supply}}
+\end{equation}
+where supply elasticity is measured using geographic constraints (Saiz 2010).
+\end{prediction}
+
+\begin{prediction}[Policy Regime Shift]
+\label{pred:regime_shift}
+Tightening of credit constraints (e.g., ATR/QM implementation) attenuates the narrative-to-volume transmission:
+\begin{equation}
+\frac{\partial V_{t+1}}{\partial N_t^{\text{buy}}} \bigg|_{\text{post-2014, high exposure}} < \frac{\partial V_{t+1}}{\partial N_t^{\text{buy}}} \bigg|_{\text{pre-2014, high exposure}}
+\end{equation}
+\end{prediction}
+
+\begin{prediction}[Placebo Null Effect]
+\label{pred:placebo}
+Narrative indices constructed from keywords unrelated to housing (e.g., ``vacation planning,'' ``kitchen remodel'') should show no predictive power for housing volume:
+\begin{equation}
+\frac{\partial V_{t+1}}{\partial N_t^{\text{placebo}}} = 0
+\end{equation}
+\end{prediction}
+
+We empirically test the volume-vs-price and supply-constraint predictions in Section \ref{sec:results}. Credit- and policy-related predictions are left for future work.

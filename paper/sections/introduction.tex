@@ -1,0 +1,52 @@
+% ============================================
+% INTRODUCTION
+% ============================================
+
+\subsection{Motivation}
+
+Housing markets exhibit dramatic boom-bust cycles that profoundly affect household wealth, financial stability, and macroeconomic performance. A growing body of research points to the importance of \textit{narratives}---the stories, beliefs, and viral ideas that shape how people interpret market signals \citep{shiller2017narrative}. The prevailing view suggests that narratives act as independent demand shocks: a viral ``buy now'' story triggers distinct waves of purchasing behavior.
+
+However, the transmission mechanism from ``story'' to ``statistic'' remains poorly understood. Does a bullish narrative \textit{always} trigger a boom? Or does the physical reality of the market---inventory constraints, supply elasticity---act as a gatekeeper? Standard behavioral models often treat narratives as frictionless demand shifters, implying a universal link between attention and action. In contrast, complex systems theory suggests that such feedback loops should be highly state-dependent, emerging only when the system is under specific stress or constraint.
+
+This paper tests these competing views by asking: \textbf{Is narrative transmission universal, or is it gated by market frictions?}
+
+\subsection{Research Questions}
+
+We address two interrelated questions using a rigorous measurement approach:
+
+\begin{enumerate}[label=\textbf{RQ\arabic*:}]
+    \item \textbf{Universal vs. Conditional:} Does narrative attention predict housing transaction volume on average, or is the relationship conditional on market state?
+    \item \textbf{The Role of Frictions:} Do physical constraints (inventory shortages) and structural constraints (supply inelasticity) amplify or dampen the conversion of narrative attention into economic action?
+\end{enumerate}
+
+\subsection{Preview of Approach and Findings}
+
+To measure these relationships consistently, we overcome a common measurement error in Google Trends analysis by implementing a \textbf{pooled within-keyword z-standardization} procedure that makes search intensity comparable across 127 U.S. Designated Market Areas (DMAs). We further aggregate all housing outcomes to the DMA level to ensure precise identification alignment.
+
+Our findings challenge the simple ``narrative-driven'' view and support a ``friction-gated'' model:
+
+\begin{enumerate}
+    \item \textbf{Null Average Effect:} In the full panel (2012--2024), the average predictive effect of narrative attention on transaction volume is statistically indistinguishable from zero ($p=0.78$). This suggests that in ``normal'' times, high search volume is often noise rather than signal.
+    
+    \item \textbf{The Friction Gate:} We document profound state-dependence. Narrative attention becomes a significant predictor of volume \textit{only} in high-friction regimes:
+    \begin{itemize}
+        \item \textbf{State Friction (Inventory):} When inventory is low (tight market), ``Buy'' narratives significantly predict higher transaction volume ($\beta > 0, p=0.03$).
+        \item \textbf{Structural Friction (Elasticity):} In supply-inelastic markets, the narrative-volume link is directionally stronger ($p=0.095$).
+    \end{itemize}
+    
+    \item \textbf{Conditional Amplification:} We find that frictions act as a selective conductor. In tight markets, ``Buy'' narratives are significantly amplified. While we do not find significant interactions for ``Risk'' narratives, the dominance of bullish sentiment suggests that physical shortages may override bearish sentiment, forcing valid demand to compete aggressively (amplifying FOMO).
+\end{enumerate}
+
+\subsection{Contributions}
+
+This paper makes three primary contributions:
+
+\paragraph{Contribution 1: Rigorous Identification.} We show that previous findings of ``universal'' narrative effects may be artifacts of measurement error (non-comparable scales) and unit mismatch. By correcting these measurement issues via pooled within-keyword z-standardization and DMA aggregation, we establish a robust null baseline for the average effect.
+
+\paragraph{Contribution 2: The ``Friction Gate'' Theory.} We provide empirical evidence that frictions are not merely impediments to efficiency but are \textit{conductors} of narrative transmission. We show that narratives require a ``stressed'' system (low inventory) to crystallize into observable economic fluctuations.
+
+\paragraph{Contribution 3: Complex Systems Evidence.} Our findings align with a complex adaptive systems (CAS) view, where macro-level patterns (booms) emerge from micro-level interactions only under specific phase-transition conditions (scarcity), linking narrative economics with the physics of phase transitions.
+
+\subsection{Paper Structure}
+
+The remainder of this paper is organized as follows. Section \ref{sec:literature} reviews the relevant literature. Section \ref{sec:data} describes our standardized data pipeline. Section \ref{sec:results} presents the main results, reconciling the null average effect with strong conditional significance. Section \ref{sec:discussion} interprets the "Friction Gate" mechanism. Section \ref{sec:conclusion} concludes.
