@@ -213,7 +213,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Data provided by Redfin and the Federal Reserve Economic Data (FRED)
 - Google Trends data accessed via pytrends
-- Research conducted at [Your Institution]
 
 ---
 

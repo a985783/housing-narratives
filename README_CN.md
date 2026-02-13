@@ -205,7 +205,6 @@ housing-narratives/
 
 - 数据由Redfin和联邦储备经济数据（FRED）提供
 - Google Trends数据通过pytrends获取
-- 研究于[您的机构]进行
 
 ---
 
