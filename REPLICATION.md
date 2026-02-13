@@ -1,5 +1,7 @@
 # Detailed Replication Guide
 
+[中文版本](REPLICATION_CN.md)
+
 This document provides a comprehensive guide for replicating the results in "The Friction Gate: Narrative Transmission in Housing Markets."
 
 ---

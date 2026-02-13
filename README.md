@@ -1,6 +1,8 @@
 # Replication Package: The Friction Gate
 ## Narrative Transmission in Housing Markets
 
+**English Version** | [中文版本](README_CN.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
@@ -118,7 +120,9 @@ python code/12_final_tables.py
 ```
 housing-narratives/
 ├── README.md                   # This file
+├── README_CN.md               # 中文版本
 ├── REPLICATION.md              # Detailed replication guide
+├── REPLICATION_CN.md          # 中文复现指南
 ├── CITATION.cff                # Citation metadata
 ├── LICENSE                     # MIT License
 ├── requirements.txt            # Python dependencies
@@ -165,7 +169,9 @@ housing-narratives/
 
 ## 📚 Documentation
 
+- **[README_CN.md](README_CN.md)** - 中文项目概述
 - **[REPLICATION.md](REPLICATION.md)** - Step-by-step replication guide with code-to-paper mapping
+- **[REPLICATION_CN.md](REPLICATION_CN.md)** - 中文分步复现指南
 - **[DATA_PIPELINE.md](docs/DATA_PIPELINE.md)** - Detailed data construction documentation
 - **[COVER_LETTER.md](COVER_LETTER.md)** - Journal submission cover letter
 
@@ -189,7 +195,7 @@ If you use this code or data, please cite:
 
 ## 📧 Contact
 
-**Qingsong Cui**
+**Qingsong Cui (崔庆松)**
 - Email: qingsongcui9857@gmail.com
 - GitHub: [@qingsongcui](https://github.com/qingsongcui)
 
